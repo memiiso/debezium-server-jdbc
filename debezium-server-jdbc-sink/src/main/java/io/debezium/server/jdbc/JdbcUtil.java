@@ -57,16 +57,12 @@ public class JdbcUtil {
 
   private static Map<String, DataType<?>> fields(JsonNode valueSchema) {
     if (valueSchema != null && valueSchema.has("fields") && valueSchema.get("fields").isArray()) {
-      return fields(valueSchema, "", 0, true);
+      return fields(valueSchema, "", 0);
     }
     return new HashMap<>();
   }
 
-//  private static Map<String, DataType<?>> fields(JsonNode eventSchema, String schemaName, int columnId) {
-//    return fields(eventSchema, schemaName, columnId, false);
-//  }
-
-  private static Map<String, DataType<?>> fields(JsonNode eventSchema, String schemaName, int columnId, boolean addSourceTsField) {
+  private static Map<String, DataType<?>> fields(JsonNode eventSchema, String schemaName, int columnId) {
     Map<String, DataType<?>> fields = new HashMap<>();
     String schemaType = eventSchema.get("type").textValue();
     LOGGER.debug("Converting Schema of: {}::{}", schemaName, schemaType);

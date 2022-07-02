@@ -30,9 +30,8 @@
         <version.groovy>3.0.9</version.groovy>
         <version.assembly.plugin>3.3.0</version.assembly.plugin>
         <version.testcontainers>1.17.1</version.testcontainers>
-        <version.kafkaclients>3.1.0</version.kafkaclients>
         <!-- Debezium -->
-        <version.debezium>1.9.2.Final</version.debezium>
+        <version.debezium>1.9.3.Final</version.debezium>
         <version.mysql.driver>8.0.28</version.mysql.driver>
         <!-- Quarkus -->
         <version.quarkus>2.8.2.Final</version.quarkus>

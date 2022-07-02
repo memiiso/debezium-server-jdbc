@@ -24,8 +24,8 @@ public class RelationalTable {
 
   public final String tableName;
   private final String schemaName;
-  public Map<String, JDBCType> columns = new HashMap<>();
-  public Map<String, Integer> primaryKeys = new HashMap<>();
+  public final Map<String, JDBCType> columns = new HashMap<>();
+  public final Map<String, Integer> primaryKeys = new HashMap<>();
 
   public RelationalTable(String schemaName, String tableName, Connection conn) throws DebeziumException {
     this.schemaName = schemaName;

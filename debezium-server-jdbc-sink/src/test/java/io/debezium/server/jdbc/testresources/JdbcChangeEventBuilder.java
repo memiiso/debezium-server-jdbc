@@ -44,14 +44,14 @@ public class JdbcChangeEventBuilder {
   public JdbcChangeEventBuilder addField(String parentFieldName, String name, String val) {
     ObjectNode nestedField = JsonNodeFactory.instance.objectNode();
     nestedField.put(name, val);
-    this.payload.put(parentFieldName, nestedField);
+    this.payload.set(parentFieldName, nestedField);
     return this;
   }
 
   public JdbcChangeEventBuilder addField(String parentFieldName, String name, int val) {
     ObjectNode nestedField = JsonNodeFactory.instance.objectNode();
     nestedField.put(name, val);
-    this.payload.put(parentFieldName, nestedField);
+    this.payload.set(parentFieldName, nestedField);
     return this;
   }
 
@@ -62,7 +62,7 @@ public class JdbcChangeEventBuilder {
       nestedField = (ObjectNode) this.payload.get(parentFieldName);
     }
     nestedField.put(name, val);
-    this.payload.put(parentFieldName, nestedField);
+    this.payload.set(parentFieldName, nestedField);
     return this;
   }
 

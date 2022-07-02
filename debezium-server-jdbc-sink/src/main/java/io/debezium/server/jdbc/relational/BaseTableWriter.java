@@ -31,11 +31,6 @@ public abstract class BaseTableWriter {
     final String sql = table.preparedInsertStatement();
     int inserts = jdbi.withHandle(handle -> {
       PreparedBatch b = handle.prepareBatch(sql);
-      // @TODO bind field by field with json type conversion
-      // @TODO use table to generate sql and bind data!
-      // @TODO move createPreparedInsertStatement to table!
-      //b.add();
-      //b.bind();
       events.forEach(e -> b.add(e.valueAsMap()));
       return Arrays.stream(b.execute()).sum();
     });

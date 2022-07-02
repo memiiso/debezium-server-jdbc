@@ -27,7 +27,7 @@ public class JdbcChangeEvent {
   protected final String destination;
   protected final JsonNode value;
   protected final JsonNode key;
-  Schema schema;
+  final Schema schema;
 
   public JdbcChangeEvent(String destination, JsonNode value, JsonNode key, JsonNode valueSchema, JsonNode keySchema) {
     this.destination = destination;

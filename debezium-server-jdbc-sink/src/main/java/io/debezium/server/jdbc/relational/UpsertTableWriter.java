@@ -23,9 +23,9 @@ import org.jdbi.v3.core.statement.PreparedBatch;
 public class UpsertTableWriter extends BaseTableWriter {
   static final ImmutableMap<String, Integer> cdcOperations = ImmutableMap.of("c", 1, "r", 2, "u", 3, "d", 4);
   private final AppendTableWriter appendTableWriter;
-  String sourceTsMsColumn = "__source_ts_ms";
-  String opColumn = "__op";
-  boolean upsertKeepDeletes;
+  final String sourceTsMsColumn = "__source_ts_ms";
+  final String opColumn = "__op";
+  final boolean upsertKeepDeletes;
 
   public UpsertTableWriter(Jdbi jdbi, boolean upsertKeepDeletes) {
     super(jdbi);
