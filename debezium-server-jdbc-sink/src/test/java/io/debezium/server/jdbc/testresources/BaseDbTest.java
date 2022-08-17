@@ -19,8 +19,6 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 public class BaseDbTest {
   @ConfigProperty(name = "debezium.sink.jdbc.table-prefix", defaultValue = "")
   String tablePrefix;
-  @ConfigProperty(name = "debezium.sink.jdbc.table-namespace", defaultValue = "default")
-  String namespace;
   public static SparkSession spark = SparkSession.builder().appName("unittest").master("local[2]").getOrCreate();
 
   public static void PGCreateTestDataTable() throws Exception {

@@ -9,6 +9,21 @@ to one or run it with append mode and keep all change events in jdbc table. When
 enabled (`debezium.format.value.schemas.enable=true`, `debezium.format.key.schemas.enable=true`) destination Jdbc
 tables created automatically with initial job.
 
+#### Configuration properties
+
+| Config                                               | Default           | Description                                                                                                      |
+|------------------------------------------------------|-------------------|------------------------------------------------------------------------------------------------------------------|
+| `debezium.sink.jdbc.database.url`                    | ``                | Destination database jdbc url.                                                                                   |
+| `debezium.sink.jdbc.database.username`               | ``                | Destination database user name.                                                                                  |
+| `debezium.sink.jdbc.database.password`               | ``                | Destination database user password.                                                                              |
+| `debezium.sink.jdbc.table-prefix`                    | ``                | Prefix added to destination table names.                                                                         |
+| `debezium.sink.jdbc.upsert`                          | `true`            | Running upsert mode overwriting updated rows. explained below.                                                   |
+| `debezium.sink.jdbc.upsert-keep-deletes`             | `true`            | With upsert mode, keeps deleted rows in target table.                                                            |
+| `debezium.sink.jdbc.destination-regexp`              | ``                | Regexp to modify destination table. With this its possible to map `table_ptt1`,`table_ptt2` to `table_combined`. |
+| `debezium.sink.jdbc.destination-regexp-replace`      | ``                | Regexp Replace part to modify destination table                                                                  |
+| `debezium.sink.batch.batch-size-wait`                | `NoBatchSizeWait` | Batch size wait strategy to optimize data files and upload interval. explained below.                            |
+| `debezium.sink.jdbc.database.param.{jdbc.prop.name}` |                   | Additional jdbc connection config for destination database.                                                      |
+
 ### Upsert
 
 By default, Jdbc consumer is running with upsert mode `debezium.sink.jdbc.upsert=true`.
@@ -19,8 +34,6 @@ Primary Key consumer falls back to append mode.
 
 With upsert mode per batch data deduplication is done. Deduplication is done based on `__source_ts_ms` value and event
 type `__op`.
-its is possible to change field using `debezium.sink.jdbc.upsert-dedup-column=__source_ts_ms`. Currently only
-Long field type supported.
 
 Operation type priorities are `{"c":1, "r":2, "u":3, "d":4}`. When two records with same key and same `__source_ts_ms`
 values received then the record with higher `__op` priority is kept and added to destination table and duplicate record
@@ -109,10 +122,10 @@ debezium.transforms.unwrap.delete.handling.mode=rewrite
 
 ### Configuring jdbc
 
-All the properties starting with `debezium.sink.jdbc.__CONFIG__` are passed to Jdbc, and to hadoopConf
+All the properties starting with `debezium.sink.jdbc.database.param.__CONFIG__` are passed to Jdbc connection.
 
 ```properties
-debezium.sink.jdbc.{jdbc.prop.name}=xyz-value # passed to jdbc!
+debezium.sink.jdbc.database.param.__CONFIG__=xyz-value # passed to jdbc connection!
 ```
 
 ### Example Configuration
