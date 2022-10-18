@@ -27,7 +27,7 @@
         <release>8</release>
         <skipITs>true</skipITs>
 
-        <version.groovy>3.0.9</version.groovy>
+        <version.groovy>3.0.13</version.groovy>
         <version.assembly.plugin>3.3.0</version.assembly.plugin>
         <version.testcontainers>1.17.1</version.testcontainers>
         <!-- Debezium -->
