@@ -37,7 +37,7 @@
         <version.quarkus>2.8.2.Final</version.quarkus>
         <!-- ANTLR -->
         <!-- Align with Antlr runtime version pulled in via debezium -->
-        <version.antlr>4.8</version.antlr>
+        <version.antlr>4.11.1</version.antlr>
     </properties>
 
     <dependencyManagement>
