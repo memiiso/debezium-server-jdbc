@@ -8,9 +8,7 @@
 
 package io.debezium.server.jdbc.relational;
 
-import io.debezium.DebeziumException;
-
-public class TableNotFoundException extends DebeziumException {
+public class TableNotFoundException extends RuntimeException {
   public TableNotFoundException(String message) {
     super(message);
   }

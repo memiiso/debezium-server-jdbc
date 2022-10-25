@@ -72,13 +72,6 @@
             <artifactId>jooq-meta</artifactId>
             <version>3.16.0</version>
         </dependency>
-        <!-- Hibernate-->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>6.1.0.Final</version>
-            <scope>test</scope>
-        </dependency>
         <!-- Testing -->
         <dependency>
             <groupId>io.quarkus</groupId>
@@ -90,7 +83,7 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>test</scope>
-            <version>42.4.1</version>
+            <version>42.5.0</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -99,14 +92,14 @@
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-core_2.12</artifactId>
-            <version>3.3.0</version>
+            <artifactId>spark-core_2.13</artifactId>
+            <version>3.3.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-sql_2.12</artifactId>
-            <version>3.3.0</version>
+            <artifactId>spark-sql_2.13</artifactId>
+            <version>3.3.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
