@@ -28,7 +28,7 @@
         <skipITs>true</skipITs>
 
         <version.groovy>3.0.13</version.groovy>
-        <version.assembly.plugin>3.3.0</version.assembly.plugin>
+        <version.assembly.plugin>3.4.2</version.assembly.plugin>
         <version.testcontainers>1.17.5</version.testcontainers>
         <!-- Debezium -->
         <version.debezium>1.9.3.Final</version.debezium>
