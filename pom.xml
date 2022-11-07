@@ -32,7 +32,7 @@
         <version.testcontainers>1.17.5</version.testcontainers>
         <!-- Debezium -->
         <version.debezium>1.9.3.Final</version.debezium>
-        <version.mysql.driver>8.0.28</version.mysql.driver>
+        <version.mysql.driver>8.0.30</version.mysql.driver>
         <!-- Quarkus -->
         <version.quarkus>2.13.3.Final</version.quarkus>
         <!-- ANTLR -->
