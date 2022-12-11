@@ -82,15 +82,15 @@ public class RelationalTable {
     return String.format("%s.%s", schemaName, tableName);
   }
 
-  public String preparedInsertStatement() {
+  public String preparedInsertStatement(String identifierQuoteCharacter) {
     StringBuilder sql = new StringBuilder();
-    sql.append(String.format("INSERT INTO %s \n", tableName));
+    sql.append(String.format("INSERT INTO %s \n", tableName)); // @TODO quote it
 
     Set<String> fields = this.columns.keySet();
 
     sql.append(String.format("(%s) \n",
         fields.stream()
-            .map(f -> String.format("%s ", f))
+            .map(f -> String.format("%s%s%s ", identifierQuoteCharacter, f, identifierQuoteCharacter))
             .collect(Collectors.joining(", "))));
 
     sql.append(String.format("VALUES (%s)\n",
@@ -101,20 +101,20 @@ public class RelationalTable {
     return sql.toString().trim();
   }
 
-  public String preparedDeleteStatement() {
+  public String preparedDeleteStatement(String identifierQuoteCharacter) {
 
     if (!hasPK()) {
       throw new DebeziumException("Cant delete from a table without primary key!");
     }
 
     StringBuilder sql = new StringBuilder();
-    sql.append(String.format("DELETE FROM %s \nWHERE ", tableName));
+    sql.append(String.format("DELETE FROM %s \nWHERE ", tableName)); // @TODO quote it
 
     Set<String> fields = this.primaryKeys.keySet();
 
     sql.append(String.format("%s \n",
         fields.stream()
-            .map(f -> String.format("%s = :%s ", f, f))
+            .map(f -> String.format("%s%s%s = :%s ", identifierQuoteCharacter, f, identifierQuoteCharacter, f))
             .collect(Collectors.joining("\n    AND "))));
 
     return sql.toString().trim();
