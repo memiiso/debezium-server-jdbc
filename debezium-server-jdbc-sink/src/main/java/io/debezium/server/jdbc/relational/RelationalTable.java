@@ -84,7 +84,8 @@ public class RelationalTable {
 
   public String preparedInsertStatement(String identifierQuoteCharacter) {
     StringBuilder sql = new StringBuilder();
-    sql.append(String.format("INSERT INTO %s \n", tableName)); // @TODO quote it
+    sql.append(String.format("INSERT INTO %s%s%s.%s%s%s \n",
+        identifierQuoteCharacter, schemaName, identifierQuoteCharacter, identifierQuoteCharacter, tableName, identifierQuoteCharacter));
 
     Set<String> fields = this.columns.keySet();
 
@@ -108,7 +109,8 @@ public class RelationalTable {
     }
 
     StringBuilder sql = new StringBuilder();
-    sql.append(String.format("DELETE FROM %s \nWHERE ", tableName)); // @TODO quote it
+    sql.append(String.format("DELETE FROM %s%s%s.%s%s%s \nWHERE ",
+        identifierQuoteCharacter, schemaName, identifierQuoteCharacter, identifierQuoteCharacter, tableName, identifierQuoteCharacter));
 
     Set<String> fields = this.primaryKeys.keySet();
 
