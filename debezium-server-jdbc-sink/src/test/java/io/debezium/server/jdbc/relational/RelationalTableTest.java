@@ -82,7 +82,7 @@ class RelationalTableTest {
 
   @Test
   void complexTypeBinding() {
-    String withPK = "INSERT INTO tbl_with_pk (id, coll1) values (:id, :coll1) ";
+    String withPK = "INSERT INTO \"public\".\"tbl_with_pk\" (\"id\", \"coll1\") values (:id, :coll1) ";
     try (Handle handle = jdbi.open()) {
       LinkedHashMap<Integer, String> testhashmap = new LinkedHashMap<>();
       testhashmap.put(100, "Amit");
@@ -117,30 +117,30 @@ class RelationalTableTest {
 
   @Test
   void preparedInsertStatement() {
-    String withPK = "INSERT INTO tbl_with_pk \n" +
+    String withPK = "INSERT INTO public.tbl_with_pk \n" +
                     "(coll3 , coll2 , coll1 , id , coll4 ) \n" +
                     "VALUES (:coll3, :coll2, :coll1, :id, :coll4)";
-    String withoutPK = "INSERT INTO tbl_without_pk \n" +
-                       "(coll3 , coll2 , coll1 , id , coll4 ) \n" +
+    String withoutPK = "INSERT INTO \"public\".\"tbl_without_pk\" \n" +
+                       "(\"coll3\" , \"coll2\" , \"coll1\" , \"id\" , \"coll4\" ) \n" +
                        "VALUES (:coll3, :coll2, :coll1, :id, :coll4)";
     try (Handle handle = jdbi.open()) {
       RelationalTable tbl_without_pk = new RelationalTable("public", "tbl_without_pk", handle.getConnection());
       RelationalTable tbl_with_pk = new RelationalTable("public", "tbl_with_pk", handle.getConnection());
-      Assert.assertEquals(withPK, tbl_with_pk.preparedInsertStatement());
-      Assert.assertEquals(withoutPK, tbl_without_pk.preparedInsertStatement());
+      Assert.assertEquals(withPK, tbl_with_pk.preparedInsertStatement(""));
+      Assert.assertEquals(withoutPK, tbl_without_pk.preparedInsertStatement("\""));
     }
   }
 
   @Test
   void preparedDeleteStatement() {
-    String withPK = "DELETE FROM tbl_with_pk \n" +
+    String withPK = "DELETE FROM public.tbl_with_pk \n" +
                     "WHERE coll1 = :coll1 \n" +
                     "    AND id = :id";
     try (Handle handle = jdbi.open()) {
       RelationalTable tbl_without_pk = new RelationalTable("public", "tbl_without_pk", handle.getConnection());
       RelationalTable tbl_with_pk = new RelationalTable("public", "tbl_with_pk", handle.getConnection());
-      Assert.assertEquals(withPK, tbl_with_pk.preparedDeleteStatement());
-      Assert.assertThrows(DebeziumException.class, tbl_without_pk::preparedDeleteStatement);
+      Assert.assertEquals(withPK, tbl_with_pk.preparedDeleteStatement(""));
+      Assert.assertThrows(DebeziumException.class, () -> tbl_without_pk.preparedDeleteStatement(""));
     }
   }
 }

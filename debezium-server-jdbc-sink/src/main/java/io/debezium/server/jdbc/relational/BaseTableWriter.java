@@ -22,13 +22,15 @@ public abstract class BaseTableWriter {
 
   protected static final Logger LOGGER = LoggerFactory.getLogger(BaseTableWriter.class);
   final Jdbi jdbi;
+  final String identifierQuoteCharacter;
 
-  public BaseTableWriter(final Jdbi jdbi) {
+  public BaseTableWriter(final Jdbi jdbi, String identifierQuoteCharacter) {
     this.jdbi = jdbi;
+    this.identifierQuoteCharacter = identifierQuoteCharacter;
   }
 
   public void addToTable(final RelationalTable table, final List<JdbcChangeEvent> events) {
-    final String sql = table.preparedInsertStatement();
+    final String sql = table.preparedInsertStatement(this.identifierQuoteCharacter);
     int inserts = jdbi.withHandle(handle -> {
       PreparedBatch b = handle.prepareBatch(sql);
       events.forEach(e -> b.add(e.valueAsMap()));

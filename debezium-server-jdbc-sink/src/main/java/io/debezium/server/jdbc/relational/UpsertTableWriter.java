@@ -27,10 +27,10 @@ public class UpsertTableWriter extends BaseTableWriter {
   final String opColumn = "__op";
   final boolean upsertKeepDeletes;
 
-  public UpsertTableWriter(Jdbi jdbi, boolean upsertKeepDeletes) {
-    super(jdbi);
+  public UpsertTableWriter(Jdbi jdbi, String identifierQuoteCharacter, boolean upsertKeepDeletes) {
+    super(jdbi, identifierQuoteCharacter);
     this.upsertKeepDeletes = upsertKeepDeletes;
-    appendTableWriter = new AppendTableWriter(jdbi);
+    appendTableWriter = new AppendTableWriter(jdbi, identifierQuoteCharacter);
   }
 
   @Override
@@ -47,8 +47,8 @@ public class UpsertTableWriter extends BaseTableWriter {
 
     int inserts = jdbi.withHandle(handle -> {
       handle.begin(); // USE SINGLE TRANSACTION
-      PreparedBatch delete = handle.prepareBatch(table.preparedDeleteStatement());
-      PreparedBatch insert = handle.prepareBatch(table.preparedInsertStatement());
+      PreparedBatch delete = handle.prepareBatch(table.preparedDeleteStatement(this.identifierQuoteCharacter));
+      PreparedBatch insert = handle.prepareBatch(table.preparedInsertStatement(this.identifierQuoteCharacter));
 
       for (JdbcChangeEvent row : events) {
         // if its deleted row and upsertKeepDeletes = true then add deleted record to target table

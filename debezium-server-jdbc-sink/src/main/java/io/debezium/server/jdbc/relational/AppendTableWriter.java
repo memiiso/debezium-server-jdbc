@@ -11,7 +11,7 @@ package io.debezium.server.jdbc.relational;
 import org.jdbi.v3.core.Jdbi;
 
 public class AppendTableWriter extends BaseTableWriter {
-  public AppendTableWriter(Jdbi jdbi) {
-    super(jdbi);
+  public AppendTableWriter(Jdbi jdbi, String identifierQuoteCharacter) {
+    super(jdbi, identifierQuoteCharacter);
   }
 }
