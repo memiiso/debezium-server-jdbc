@@ -71,23 +71,18 @@ public class UpsertTableWriter extends BaseTableWriter {
 
   private List<JdbcChangeEvent> deduplicateBatch(List<JdbcChangeEvent> events) {
 
-    ConcurrentHashMap<JsonNode, JdbcChangeEvent> deduplicated = new ConcurrentHashMap<>();
-
-    for (JdbcChangeEvent e : events) {
-
-      if (deduplicated.containsKey(e.key())) {
-
-        // replace it if it's new
-        if (this.compareByTsThenOp(deduplicated.get(e.key()).value(), e.value()) <= 0) {
-          deduplicated.put(e.key(), e);
-        }
-
-      } else {
-        deduplicated.put(e.key(), e);
-      }
-
-    }
-    return new ArrayList<>(deduplicated.values());
+    ConcurrentHashMap<JsonNode, JdbcChangeEvent> deduplicatedEvents = new ConcurrentHashMap<>();
+    events.forEach(e ->
+        // deduplicate using key(PK)
+        deduplicatedEvents.merge(e.key(), e, (oldValue, newValue) -> {
+          if (this.compareByTsThenOp(oldValue.value(), newValue.value()) <= 0) {
+            return newValue;
+          } else {
+            return oldValue;
+          }
+        })
+    );
+    return new ArrayList<>(deduplicatedEvents.values());
   }
 
   private int compareByTsThenOp(JsonNode lhs, JsonNode rhs) {
