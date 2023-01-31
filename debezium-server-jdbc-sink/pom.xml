@@ -72,6 +72,11 @@
             <artifactId>jooq-meta</artifactId>
             <version>3.16.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.querydsl</groupId>
+            <artifactId>querydsl-sql</artifactId>
+            <version>5.0.0</version>
+        </dependency>
         <!-- Testing -->
         <dependency>
             <groupId>io.quarkus</groupId>
