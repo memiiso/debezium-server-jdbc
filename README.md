@@ -2,7 +2,11 @@
 ![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)
 ![Java CI](https://github.com/memiiso/debezium-server-jdbc/workflows/Java%20CI%20with%20Maven/badge.svg?branch=master)
 
-# Debezium Jdbc Consumers
+> [!IMPORTANT] 
+> Upstream debezium now have offical JDBC consumer, please [debezium-connector-jdbc](https://github.com/debezium/debezium-connector-jdbc). its recommended to use upstream solution for jdbc sinks
+
+
+# Debezium Jdbc Consumer
 
 This project adds JDBC database consumer
 to [Debezium Server](https://debezium.io/documentation/reference/operations/debezium-server.html). It could be used to
