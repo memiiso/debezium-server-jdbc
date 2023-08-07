@@ -3,7 +3,7 @@
 ![Java CI](https://github.com/memiiso/debezium-server-jdbc/workflows/Java%20CI%20with%20Maven/badge.svg?branch=master)
 
 > [!IMPORTANT] 
-> Upstream debezium now have offical JDBC consumer, please [debezium-connector-jdbc](https://github.com/debezium/debezium-connector-jdbc). its recommended to use upstream solution for jdbc sinks
+> Upstream debezium now have offical JDBC consumer, see [debezium-connector-jdbc](https://github.com/debezium/debezium-connector-jdbc). its recommended to use upstream solution for jdbc sinks
 
 
 # Debezium Jdbc Consumer
